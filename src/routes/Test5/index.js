@@ -3,6 +3,7 @@ import { cssWrapper } from './style';
 
 import Comp1 from "./Comp1";
 import Comp3 from "./Comp3";
+import InputContext, { Context } from './InputContext';
 
 const question = (
   <ul>
@@ -26,20 +27,30 @@ const question = (
 );
 
 const Test5 = () => {
-  return(
-    <div>
-      {question}
-      <button id="numbermin" type="button">-</button>
-      <input id="mynumber" type="text" placeholder="input mynumber"/>
-      <button id="numberplus" type="button">+</button>
-      <br/>
-      <br/>
-      <div className={cssWrapper}>
-        The inputted value is [ODD / EVEN]*
+
+  return (
+    <InputContext>
+      <div>
+        {question}
+        <Context.Consumer>
+          {(value) => (
+            <>
+              <button id="numbermin" type="button" onClick={() => value.setData({ ...value.data, 'mynumber': (value.data.mynumber || 0) - 1 })}>-</button>
+              <input id="mynumber" type="text" placeholder="input mynumber" onChange={(e) => value.setData({ ...value.data, 'mynumber': Number(e.currentTarget.value) || 0 })} value={value.data.mynumber} />
+              <button id="numberplus" type="button" onClick={() => value.setData({ ...value.data, 'mynumber': (value.data.mynumber || 0) + 1 })}>+</button>
+              <br />
+              <br />
+              <div className={cssWrapper}>
+                The inputted value is [{value.data.mynumber % 2 === 0 ? 'EVEN' : 'ODD'}]*
+              </div>
+            </>
+          )
+          }
+        </Context.Consumer>
+        <Comp1 />
+        <Comp3 />
       </div>
-      <Comp1 />
-      <Comp3 />
-    </div>
+    </InputContext>
   )
 }
 

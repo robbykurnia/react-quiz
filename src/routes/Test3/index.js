@@ -1,13 +1,21 @@
+import { useRef } from 'react'
+
 const Test3 = () => {
-  return(
+  const inputRef = useRef(null)
+  const handleFocus = () => {
+    if (inputRef?.current) {
+      inputRef.current.focus()
+    }
+  }
+  return (
     <div>
       <ul>
         <li>Please focus to the text field when user click the focus button</li>
       </ul>
       <p>
-        <button type="button">Focus Text Field</button>
+        <button type="button" onClick={handleFocus}>Focus Text Field</button>
       </p>
-      <input type="text" placeholder="focus me"/>
+      <input ref={inputRef} type="text" placeholder="focus me" />
     </div>
   )
 }

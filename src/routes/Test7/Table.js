@@ -1,6 +1,7 @@
-import DATA from "./_data";
+import { useTable } from './TableContext'
 
 const Table = () => {
+  const { data } = useTable()
   return (
     <table>
       <thead>
@@ -11,7 +12,7 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        {DATA.map((eachrow, idx) => (
+        {data?.map((eachrow, idx) => (
           <tr key={idx}>
             <td>{eachrow.name}</td>
             <td>{eachrow.age}</td>

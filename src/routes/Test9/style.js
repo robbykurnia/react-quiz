@@ -1,4 +1,4 @@
-import { css } from 'react-emotion';
+import { css, keyframes } from 'react-emotion';
 
 export const cssSpace = css({
   marginTop: 24,
@@ -17,9 +17,21 @@ export const cssSun = css({
   borderRadius: 40,
 });
 
-export const cssPlanet = () => css({
+const rotasi = (props) => keyframes({
+  from: {
+    transform: `rotate(0) translate(${80 + (40 * props)}px)`
+  },
+  to: {
+    transform: `rotate(350deg) translate(${80 + (40 * props)}px)`
+  }
+})
+
+
+export const cssPlanet = (props) => css({
+  position: 'absolute',
   width: 20,
   height: 20,
   borderRadius: 10,
-  backgroundColor: 'red',
+  backgroundColor: `#${props.color}`,
+  animation: `${rotasi(props.index)} ${1.5 + props.index}s infinite linear`
 });

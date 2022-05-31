@@ -1,7 +1,7 @@
 
-const Input = () => {
+const Input = ({ onSubmit = null }) => {
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <input type="text" placeholder="search" />
       <button type="submit">🔍</button>
     </form>

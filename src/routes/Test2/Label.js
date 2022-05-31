@@ -17,11 +17,15 @@ const cssLabel = css({
   }
 })
 
-const Label = () => {
-  return (
-    <span className={cssLabel}>
-      RENDER VALUE HERE
-      <button type="button">⊗</button>
+const Label = ({ label = '', showChip = false, onMouseEnter = null, onMouseLeave = null }) => {
+  return label && (
+    <span
+      className={cssLabel}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      {label}
+      {showChip && (<button type="button">⊗</button>)}
     </span>
   )
 }
